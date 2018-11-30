@@ -34,13 +34,19 @@ namespace Chapter8Basis
 
             Console.WriteLine("=========GenericController<Order>=========");
             GenericController<Order> generic = CreateGenericServices();
-            generic.CreateEntity(order);
-             generic.DeleteEntity(order);
+           // generic.CreateEntity(order);
+            // generic.DeleteEntity(order);
 
             Console.WriteLine("=========GenericController<Order>=========");
-            GenericController<Item> genericItem = CreateGenericServices();
-            genericItem.CreateEntity(item);
-            genericItem.DeleteEntity(item);
+            GenericController<Item> genericItem = CreateGenericItemServices();
+            //genericItem.CreateEntity(item);
+           // genericItem.DeleteEntity(item);
+
+            Console.WriteLine("=========CreateSingleService=========");
+            ItemController single = CreateSingleServices();
+            single.CreateOrder(item);
+            single.DeleteOrder(item);
+
 
             Console.WriteLine("Hit any key to quit");
             Console.ReadKey();
@@ -58,6 +64,11 @@ namespace Chapter8Basis
         {
             var crud = new Crud<Order>();
             return new OrderController(crud, crud, crud);
+        }
+        static ItemController CreateSingleServices()
+        {
+            var crud = new Crud<Item>();
+            return new ItemController(crud, crud, crud);
         }
 
         static GenericController<Order> CreateGenericServices()
